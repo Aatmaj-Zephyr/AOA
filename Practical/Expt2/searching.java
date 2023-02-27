@@ -6,18 +6,17 @@ public class Main {
         int[] arr = new int[size];
         Random rd = new Random(); // creating Random object
         for(int i=0;i<size;i++){
-            arr[i]=rd.nextInt(0, 1000);
+            arr[i]=rd.nextInt(1000);
         }
         selectionSort(arr);
+        for(int i=0;i<=arr.length-1;i++){
         long TS1 = System.nanoTime();
-        System.out.println(recursiveBinarySearch(arr, 0, arr.length - 1, 108,0));
+        iterativeBinarySearch(arr, 0, i, arr[i],0);
 
+       
         long TS2 = System.nanoTime();
-
-        System.out.println(iterativeBinarySearch(arr, 0, arr.length - 1, 108,0));
-        long TS3 = System.nanoTime();
         System.out.println(TS2 - TS1);
-        System.out.println(TS3 - TS2);
+        }
 
     }
 
@@ -42,7 +41,7 @@ public class Main {
     public static int recursiveBinarySearch(int[] arr, int start, int end, int key,int times) {
         int mid = (int) ((start + end) / 2);
         if (arr[mid] == key) {
-            System.out.println(times+1);
+           // System.out.println(times+1);
             return mid;
         } else if (start > end) {
             return -1;
@@ -62,7 +61,7 @@ public class Main {
         while (true) {
             int mid = (int) ((start + end) / 2);
             if (arr[mid] == key) {
-                System.out.println(times+1);
+               // System.out.println(times+1);
                 return mid;
             }
             if (arr[mid] > key) {
