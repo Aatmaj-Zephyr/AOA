@@ -1,15 +1,24 @@
 import java.util.*;
-public class Main
+public class main
 {
 	public static void main(String[] args) {
 		System.out.println("Hello World");
-		int[][] adjustancy={{0,1,2,8},{2,0,1,1},{3,5,0,1000},{2,1000,1000,1000}};
+		int[][] adjustancy={ { 1000, 4, 1000, 1000, 1000, 1000, 1000, 8, 1000 },
+        { 4, 1000, 8, 1000, 1000, 1000, 1000, 11, 1000 },
+        { 1000, 8, 1000, 7, 1000, 4, 1000, 1000, 2 },
+        { 1000, 1000, 7, 1000, 9, 14, 1000, 1000, 1000 },
+        { 1000, 1000, 1000, 9, 1000, 11000, 1000, 1000, 1000 },
+        { 1000, 1000, 4, 14, 10, 1000, 2, 1000, 1000 },
+        { 1000, 1000, 1000, 1000, 1000, 2, 1000, 1, 6 },
+        { 8, 11, 1000, 1000, 1000, 1000, 1, 1000, 7 },
+        { 1000, 1000, 2, 1000, 1000, 1000, 6, 7, 1000 } };
+
 		int[] distance= new int[adjustancy[0].length];
 			for(int i=0;i<=distance.length-1;i++){
 		    distance[i]=1000;//initialize to Infinity
 		}
 		ArrayList<Integer> covered= new ArrayList<Integer>();
-		path(0,2,adjustancy,distance,covered);
+		path(0,0,adjustancy,distance,covered);
 		for(int i=0;i<=distance.length-1;i++){
 		    System.out.print(distance[i]+",");
 		}
@@ -17,8 +26,7 @@ public class Main
 	public static void path(int initialCost, int nodeId,int[][] adjustancy,int [] distance,ArrayList<Integer> covered){
 	      covered.add(nodeId);
 	         System.out.println("visited="+nodeId);
-	    int max=0;
-	    int firstUpdate=-1;//to check if the array updates max at least once or not. Else it means all is covered.
+	  
 	    for(int i=0;i<adjustancy[nodeId].length;i++){
 	        if(i==nodeId){
 	            continue; // dont check for same element
@@ -32,16 +40,29 @@ public class Main
 	       
 	        
 	    }
-	    for(int i=0;i<adjustancy[nodeId].length;i++){
-	         if(adjustancy[nodeId][i]>adjustancy[nodeId][max] ){
+	   
+	    if(covered.size()==distance.length){
+	           System.out.println("all nodes covered");
+	        return;
+	    }
+        int max=-1;
+        for(int i=0;i<distance.length;i++){
+            if(i==nodeId){
+                continue;
+            }
+            if(!covered.contains(i)){
+                if(max==-1){
+                    max=i;
+                }
+                else
+            
+	         if(distance[i]<distance[max] ){
+                
 	            max=i;
 	             System.out.println("max is  "+max);
 	           
 	        }
-	    }
-	    if(covered.size()==distance.length){
-	           System.out.println("all nodes covered");
-	        return;
+        }
 	    }
 	  
 	    path(distance[max],max,adjustancy,distance,covered);
