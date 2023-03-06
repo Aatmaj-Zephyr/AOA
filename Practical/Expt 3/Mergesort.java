@@ -1,15 +1,23 @@
 import java.util.*;
 public class Main
 {
+    static int time;
 	public static void main(String[] args) {
-		System.out.println("Hello World");
-		int [] a = {11,2,3,45};
-		mergeSort(a);
-		System.out.println(Arrays.toString(a));
+	 int size=3000;
+        int[] a = new int[size];
+        Random rd = new Random(); // creating Random object
+        for(int i=0;i<size;i++){
+            a[i]=rd.nextInt(1000);
+        }
+        for(int i=10;i<size;i=i+1){
+		mergeSort(Arrays.copyOfRange(a, 0, i));
+		System.out.println(time);
+		time=0;
+        }
 	}
 	
 	public static int[] mergeSort(int[] a){
-	    System.out.println(Arrays.toString(a));
+	    //System.out.println(Arrays.toString(a));
 	    if(a.length==1){
 	        return a;
 	    }
@@ -24,6 +32,7 @@ public class Main
 	        while((i+j)<=a.length-1){
 	            a[i+j]=c[j];
 	            j++;
+	            time++;
 	        }
 	    }
 	    if(j>=c.length){
@@ -31,6 +40,7 @@ public class Main
 	        while((i+j)<=a.length-1){
 	            a[i+j]=b[i];
 	             i++;
+	             time++;
 	        }
 	    }
 	    else{
