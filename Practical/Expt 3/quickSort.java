@@ -1,11 +1,20 @@
 import java.util.*;
 public class Main
-{
+{   
+    static int time;
+
 	public static void main(String[] args) {
-		System.out.println("Hello World");
-		int [] a = {5,11,2,3,45,34};
-		quickSort(a,0,4);
-		System.out.println(Arrays.toString(a));
+	 int size=3000;
+        int[] a = new int[size];
+        Random rd = new Random(); // creating Random object
+        for(int i=0;i<size;i++){
+            a[i]=rd.nextInt(1000);
+        }
+         for(int i=0;i<size;i++){
+		quickSort(a,0,i);
+		System.out.println(time);
+         }
+		
 	}
 	
 	public static void quickSort(int[] a,int start, int end){
@@ -18,12 +27,14 @@ public class Main
 	    
 	    while(i<j){
 	        while(a[i]<pivot){
+	            time++;
 	            i++;
 	            if(i>end){
 	                break;
 	            }
 	        }
 	         while(a[j]>pivot){
+	             time++;
 	            j--;
 	            if(j<start){
 	                break;
