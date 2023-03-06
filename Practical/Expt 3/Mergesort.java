@@ -1,8 +1,7 @@
 import java.util.*;
 public class Main
-{   
+{
     static int time;
-
 	public static void main(String[] args) {
 	 int size=3000;
         int[] a = new int[size];
@@ -10,51 +9,55 @@ public class Main
         for(int i=0;i<size;i++){
             a[i]=rd.nextInt(1000);
         }
-         for(int i=0;i<size;i++){
-		quickSort(a,0,i);
+        for(int i=10;i<size;i=i+1){
+		mergeSort(Arrays.copyOfRange(a, 0, i));
 		System.out.println(time);
-         }
-		
+		time=0;
+        }
 	}
 	
-	public static void quickSort(int[] a,int start, int end){
-	    if(end<start){
-	        return;
+	public static int[] mergeSort(int[] a){
+	    //System.out.println(Arrays.toString(a));
+	    if(a.length==1){
+	        return a;
 	    }
-	    int pivot=a[start];
-	    int i = start+1;
-	    int j= end;
+	    int[] b=mergeSort(Arrays.copyOfRange(a, 0, a.length/2));
+	    int [] c=mergeSort(Arrays.copyOfRange(a, a.length/2,a.length));
 	    
-	    while(i<j){
-	        while(a[i]<pivot){
+	    int i=0;int j=0;
+	    while((i+j)<=a.length-1){
+	    
+	    if(i>=b.length){
+	        //first array is now over
+	        while((i+j)<=a.length-1){
+	            a[i+j]=c[j];
+	            j++;
 	            time++;
-	            i++;
-	            if(i>end){
-	                break;
-	            }
 	        }
-	         while(a[j]>pivot){
-	             time++;
-	            j--;
-	            if(j<start){
-	                break;
-	            }
-	        }
-            if(i<j){
-	        //swap a[i],a[j]
-	        int temp=a[i];
-	        a[i]=a[j];
-	        a[j]=temp;
-            
-	        i++;
-	        j--;
-            }
 	    }
-	    //swap pivot and a[j]
-	     a[start]=a[j];
-	     a[j]=pivot;
-	     
-	    quickSort(a,start,j-1);
-	    quickSort(a,j+1,end);
+	    if(j>=c.length){
+	        //second array is now over
+	        while((i+j)<=a.length-1){
+	            a[i+j]=b[i];
+	             i++;
+	             time++;
+	        }
+	    }
+	    else{
+	    
+	    if(b[i]>c[j]){
+	        a[i+j]=b[i];
+	        i++;
+
+	    }
+	    else{
+	        a[i+j]=c[j];
+	        j++;
+	    }
+	    }
+	    }
+	    
+	    
+	    return a;
 	}
 }
