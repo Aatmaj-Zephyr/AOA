@@ -1,6 +1,6 @@
 /******************************************************************************
 
-Recursive Max,Min
+Recursive Max,Min with compatisn with time complexity
 *******************************************************************************/
 public class Main
 {
