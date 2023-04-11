@@ -3,20 +3,20 @@
 Need to put value of N
 
 *******************************************************************************/
-public class Main
+public class queen
 {
 	public static void main(String[] args) {
 		System.out.println("Hello World");
-		int N=4;
+		int N=8;
 		 int[][] positions = new int[N][N];
 		 
 		boolean a = place(0,positions);
-		
 		 
-		printPos(positions);
+		//printPos(positions);
 	}
 	public static boolean place(int queenNo,int[][] positions){
-	    for(int row=0;row<positions[0].length;row++){//iterate row
+	    boolean val=false;
+        for(int row=0;row<positions[0].length;row++){//iterate row
 	        
 	        if(checkQueen(queenNo,positions,row)==true){
 	            //place queen
@@ -24,20 +24,27 @@ public class Main
 	                
 	                if(queenNo==positions[0].length-1){
 	                    //end of recursion
+                        printPos(positions);
+                        positions[row][queenNo]=0; 
 	                    return true;
 	                }
 	                //recur
 	                if(place(queenNo+1,positions)==false){
 	                    //failed 
 	                     positions[row][queenNo]=0; 
-	                    continue; //look for next position
+	                     continue; //look for next position
 	                }
 	                else{
-	                    return true;
+                        val = true;//valid position
+                        positions[row][queenNo]=0; 
+                        continue; //still look for next position
+	                     
 	                }
-	            
 	        }
 	    }
+        if(val==true){
+            return true;
+        }
 	    //backtrack
 	    return false;
 	}
@@ -98,5 +105,6 @@ public class Main
         }
         System.out.println();
         }
+        System.out.println("___________________");
     }
 }
