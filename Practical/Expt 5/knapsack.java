@@ -24,14 +24,18 @@ public class Main
 		   
 		    capacity=capacity-ratio[i][1];
 		    if(capacity>0){
-		    System.out.println("chosen object with weight "+ratio[i][1]);
+		    System.out.println("chosen object with weight "+ratio[i][1] +" with profit " + profit[i]);
 		    
+		    }
+		    else{
+		        	System.out.println("chosen object with weight "+ratio[i][1] +" with fraction "+(double)(capacity+ratio[i][1])+"/"+ratio[i][1] +" with profit " + profit[i]);
 		    }
 		  i++;
 		    if(i==5){//on capacity less than objects
 		        break;
 		    }
 		}
+	
 	}
 	public static double[][]		insetionSort(double[][] arr1){
 	    for(int i=1;i<arr1.length;i++){
